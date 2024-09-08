@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Tablet</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            margin: 50px;
+        }
+        .tablet {
+            border: 5px solid #4a90e2;
+            background-color: #f7f7f7;
+            padding: 30px;
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"] {
+            margin: 10px;
+            padding: 10px;
+            font-size: 18px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tablet">
+        <h1>Magical Tablet</h1>
+        <p>Enter the four words to unlock the enchantment:</p>
+        <form id="magicForm">
+            <input type="text" id="word1" placeholder="Word 1" required><br>
+            <input type="text" id="word2" placeholder="Word 2" required><br>
+            <input type="text" id="word3" placeholder="Word 3" required><br>
+            <input type="text" id="word4" placeholder="Word 4" required><br>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script>
+        document.getElementById('magicForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get the entered words
+            const word1 = document.getElementById('word1').value.toLowerCase();
+            const word2 = document.getElementById('word2').value.toLowerCase();
+            const word3 = document.getElementById('word3').value.toLowerCase();
+            const word4 = document.getElementById('word4').value.toLowerCase();
+
+            // Correct words
+            const correctWords = ['frozen', 'water', 'yields', 'power'];
+            
+            // Track how many and which words are correct
+            let feedbackMessage = "Correct words: ";
+
+            if (word1 === correctWords[0]) {
+                feedbackMessage += correctWords[0] + " ";
+            }
+            if (word2 === correctWords[1]) {
+                feedbackMessage += correctWords[1] + " ";
+            }
+            if (word3 === correctWords[2]) {
+                feedbackMessage += correctWords[2] + " ";
+            }
+            if (word4 === correctWords[3]) {
+                feedbackMessage += correctWords[3] + " ";
+            }
+
+            // Check if all words are correct
+            if (
+                word1 === correctWords[0] &&
+                word2 === correctWords[1] &&
+                word3 === correctWords[2] &&
+                word4 === correctWords[3]
+            ) {
+                // If correct, go to success page
+                window.location.href = "success.html";
+            } else {
+                // If incorrect, show feedback and stay on the same page
+                if (feedbackMessage === "Correct words: ") {
+                    feedbackMessage = "No words are correct.";
+                }
+                document.getElementById('feedback').innerText = feedbackMessage.trim() + ".";
+            }
+        });
+    </script>
+
+</body>
+</html>
